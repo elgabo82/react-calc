@@ -1,4 +1,20 @@
+:root {
+  --primario: #1f4f5f;
+  --secundario: #4f1f1f;
+  --claro: #eee;
+  --oscuro: #000;
+}
+
+.App {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
 body {
+  background-color: --claro;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -10,4 +26,65 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+
+.calculadora {
+  width: 100%;
+  max-width: 400px;
+  background-color: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0px 2px 64px rgba(0, 0, 0, 0.2);
+}
+
+.display {
+  padding: 16px;
+  text-align: right;
+  background-color: var(--oscuro);
+  color: var(--claro);
+  font-size: 24px;
+  font-weight: 300;
+}
+
+.display span{
+  color: #888;
+  font-size: 24px;
+  
+}
+
+button {
+  appearance: none;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 20px;
+  padding: 16px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+.operadores {
+  display: flex;
+}
+
+.operadores button {
+  flex: 1 1 0%;
+  background-color: var(--primario);
+  font-weight: 700;
+}
+
+.numeros {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.numeros button {
+  flex: 1 1 33.33%;
+  max-width: 33.33%;
+  background-color: var(--oscuro);
 }

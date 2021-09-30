@@ -1,23 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+
+import "./index.css";
+
+import { useState } from 'react';
 
 function App() {
+
+  const [calculadora, setCalculadora] = useState("");
+  const [resultado, setResultado] = useState("");
+
+  const operadores = [ '+', '-', '*', '/', '.' ];
+
+  const actualizarCalculadora = valor => {
+    setCalculadora(calculadora + valor);
+  }
+
+  const ubicarNumeros = () => {
+    const digitos = [];
+
+    for (let i = 1; i < 10; i++) {
+      digitos.push(
+        <button key={i}>{i}</button>
+      )
+    }
+
+    return digitos;
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="calculadora">
+        <div className="display">
+          {resultado ? <span>(0)</span> : '' } { calculadora || "0"}
+        </div>
+
+        <div className="operadores">
+          <button onClick={()=> actualizarCalculadora('+')}>+</button>
+          <button onClick={()=> actualizarCalculadora('-')}>-</button>
+          <button onClick={()=> actualizarCalculadora('*')}>*</button>
+          <button onClick={()=> actualizarCalculadora('/')}>/</button>
+          <button onClick={()=> actualizarCalculadora('c')}>C</button>
+        </div>
+
+        <div className="numeros">
+          { ubicarNumeros() }
+          <button>0</button>
+          <button>=</button>
+          <button>.</button>
+        </div>
+
+      </div>
+
     </div>
   );
 }
