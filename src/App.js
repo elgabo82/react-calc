@@ -11,15 +11,17 @@ function App() {
   const operadores = [ '+', '-', '*', '/', '.' ];
 
   const actualizarCalculadora = valor => {
-    if (operadores.includes(valor) && calculadora === '' ||
+
+    if (operadores.includes(valor) && calculadora === '' ||      
       operadores.includes(valor) && operadores.includes(calculadora.slice(-1))
       ){
         return;
       }
+
     setCalculadora(calculadora + valor);
 
-    if (!operadores.includes(valor)) {
-      setResultado(eval(calculadora + valor).toString());
+     if (!operadores.includes(valor)) {
+        setResultado(eval(calculadora + valor).toString());       
     }
   }
 
@@ -36,12 +38,21 @@ function App() {
   }
 
   const calcular = () => {
-    setCalculadora(eval(calculadora).toString()); 
+    setCalculadora(eval(calculadora).toString()); // Calcula los valores almacenados
   }
 
   const limpiar = () => {
     setCalculadora(eval(0).toString()); // Pone los estados a 0
     setResultado(eval(0).toString());
+  }
+
+  const borrar = () => {
+    if (calculadora ==='') {
+      return;
+    }
+    const valor = calculadora.slice(0, -1); // elimina la última posición
+
+    setCalculadora(valor);
   }
 
   return (
@@ -58,6 +69,7 @@ function App() {
           <button onClick={()=> actualizarCalculadora('*')}>*</button>
           <button onClick={()=> actualizarCalculadora('/')}>/</button>
           <button onClick={limpiar}>C</button>
+          <button onClick={borrar}>DEL</button>
         </div>
 
         <div className="numeros">
