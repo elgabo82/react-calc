@@ -11,7 +11,16 @@ function App() {
   const operadores = [ '+', '-', '*', '/', '.' ];
 
   const actualizarCalculadora = valor => {
+    if (operadores.includes(valor) && calculadora === '' ||
+      operadores.includes(valor) && operadores.includes(calculadora.slice(-1))
+      ){
+        return;
+      }
     setCalculadora(calculadora + valor);
+
+    if (!operadores.includes(valor)) {
+      setResultado(eval(calculadora + valor).toString());
+    }
   }
 
   const ubicarNumeros = () => {
@@ -19,18 +28,28 @@ function App() {
 
     for (let i = 1; i < 10; i++) {
       digitos.push(
-        <button key={i}>{i}</button>
+        <button onClick={() => actualizarCalculadora(i.toString())} key={i}>{i}</button>
       )
     }
 
     return digitos;
   }
 
+  const calcular = () => {
+    setCalculadora(eval(calculadora).toString()); 
+  }
+
+  const limpiar = () => {
+    setCalculadora(eval(0).toString()); // Pone los estados a 0
+    setResultado(eval(0).toString());
+  }
+
   return (
     <div className="App">
       <div className="calculadora">
         <div className="display">
-          {resultado ? <span>(0)</span> : '' } { calculadora || "0"}
+          {resultado ? <span>({resultado})</span> : '' }&nbsp;       
+          { calculadora || "0"}
         </div>
 
         <div className="operadores">
@@ -38,14 +57,14 @@ function App() {
           <button onClick={()=> actualizarCalculadora('-')}>-</button>
           <button onClick={()=> actualizarCalculadora('*')}>*</button>
           <button onClick={()=> actualizarCalculadora('/')}>/</button>
-          <button onClick={()=> actualizarCalculadora('c')}>C</button>
+          <button onClick={limpiar}>C</button>
         </div>
 
         <div className="numeros">
           { ubicarNumeros() }
-          <button>0</button>
-          <button>=</button>
-          <button>.</button>
+          <button onClick={()=> actualizarCalculadora('0')}>0</button>
+          <button onClick={calcular}>=</button>
+          <button onClick={()=> actualizarCalculadora('.')}>.</button>
         </div>
 
       </div>
